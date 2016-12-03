@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+
+  <meta charset="UTF-8">
+  <title>Apple versus Orange | Landing Page</title>
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+  <link rel="stylesheet" href="/css/style.css">
+
+</head>
+<body>
+
+  <header>
+    <nav class="navbar navbar-inverse">
+
+      <a href="/" class="navbar-brand" >
+        <img src="/img/logo.png" style="display: inline-block; margin-right: 8px;" width="30px" height="30px">
+        <span style="display: inline-block;">Apple versus Orange</span>
+      </a>
+ 
+      <ul class="nav navbar-nav navbar-right">
+     <!--   <li><a href="#"><span class="glyphicon glyphicon-home"></span> Home</a></li>
+        <li><a href="#"><span class="glyphicon glyphicon-info-sign"></span> About</a></li>
+        <li><a href="#"><span class="glyphicon glyphicon-envelope"></span> Contact</a></li>
+        <li><a href="#"><span class="glyphicon glyphicon-user"></span> Sign Up</a></li> -->
+        <li><a href="#"><span class="glyphicon glyphicon-log-in"></span> Login</a></li>
+      </ul>
+      </div>
+    </nav>
+  </header>
+
+  <!--MAIN BODY GOES HERE -->
+  <%- defineContent("hero") %>
+
+   <main>
+    <div class="container">
+
+  <%- defineContent("jumbotron text-center") %>
+  
+    </div>
+  </main>
+
+  <footer>
+    Apple versus Orange. Copyright &copy; 2016
+  </footer> 
+</body>
+</html>

@@ -1,0 +1,115 @@
+body {
+  font-size: 16px;
+  font-family: Lato;
+  line-height: 1.5;
+}
+
+header .navbar {
+  border-radius: 0;
+  margin: 0;
+}
+
+@media (min-width: 768px){
+.navbar-nav.navbar-right:last-child
+ {
+   padding-right: 25px;
+ }
+
+}
+
+.navbar .navbar-brand {
+    padding: 10px;
+    display: inline-block;
+}
+
+
+
+
+.hero {
+  background-image: url(../img/headerJump.jpg);
+  background-repeat: no-repeat;
+  background-size: cover;
+  background position: center center;
+  padding: 50px 0;
+  min-height: 500px;
+  position: relative;
+}
+
+.hero-content {
+  position: absolute;
+  top: 10%;
+  text-align: center;
+  width: 100%;
+}
+.hero-content h2 {
+  color: #FFF;
+  font-size: 40px;
+}
+.hero-content p {
+  color: #FFF;
+  font-size: 20px;
+  margin-bottom: 20px;
+}
+.hero-content .btn {
+  border-radius: 2px;
+  padding: 20px 30px;
+}
+
+main {
+ min-height: 500px;
+ padding: 30px 0;
+}
+
+footer {
+  padding: 30px;
+  font-size: 14px;
+  color: #BBB;
+  background: #222;
+  text-align: center;
+}
+
+/*****Animation Section ********/
+
+
+.animation {
+  animation-duration: 2s;
+  animation-timing-function: ease-in-out; }
+  .animation--infinite {
+    animation-iteration-count: infinite; }
+  .animation--up-down {
+    animation-name: upDown; }
+    
+@keyframes upDown {
+  0% {
+    transform: translateY(-15px); }
+  50% {
+    transform: translateY(0); }
+  100% {
+    transform: translateY(-15px); } }
+
+.button {
+  display: inline-block;
+  padding: .5rem 1rem; }
+  .button--primary {
+    background-color: #ce3d90; }
+  .button--rounded {
+    border-radius: 999px; }
+  .button--scroll {
+    bottom: 2rem;
+    left: 50%;
+    position: absolute;
+    transform: translateX(-50%); }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
