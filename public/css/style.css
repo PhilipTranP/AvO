@@ -26,7 +26,7 @@ header .navbar {
 
 
 .hero {
-  background-image: url(../img/headerJump.jpg);
+  background-image: url(../img/trendChart.jpg);
   background-repeat: no-repeat;
   background-size: cover;
   background position: center center;
@@ -78,7 +78,7 @@ footer {
     animation-iteration-count: infinite; }
   .animation--up-down {
     animation-name: upDown; }
-    
+
 @keyframes upDown {
   0% {
     transform: translateY(-15px); }
