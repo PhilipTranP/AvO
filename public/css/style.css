@@ -9,16 +9,9 @@ header .navbar {
   margin: 0;
 }
 
-@media (min-width: 768px){
-.navbar-nav.navbar-right:last-child
- {
-   padding-right: 5px;
- }
-
-}
 
 .navbar .navbar-brand {
-    padding: 10px;
+    padding: 12px;
     display: inline-block;
 }
 
