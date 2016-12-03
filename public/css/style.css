@@ -12,7 +12,7 @@ header .navbar {
 @media (min-width: 768px){
 .navbar-nav.navbar-right:last-child
  {
-   padding-right: 25px;
+   padding-right: 5px;
  }
 
 }
