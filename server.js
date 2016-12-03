@@ -1,7 +1,7 @@
 var express = require('express');
 var expressLayouts = require('express-ejs-layouts');
 var app = express();
-var port = 8080;
+var PORT = process.env.PORT || 5000;
 
 // use ejs and express layouts
 
@@ -16,8 +16,8 @@ app.use('/', router);
 app.use(express.static(__dirname + '/public'));
 
 // start the server
-app.listen(port, function() {
-  console.log('app started');
+app.listen(PORT, function() {
+  console.log('app started on port 5000!');
 });
 
 // route our app
