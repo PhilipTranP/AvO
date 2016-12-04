@@ -1,4 +1,5 @@
-console.log('from main');
+'use strict';
+
 $(function () {
 
   // highest # of choices (inputs) allowed
