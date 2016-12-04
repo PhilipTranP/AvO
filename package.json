@@ -10,6 +10,7 @@
   "license": "ISC",
   "dependencies": {
     "Sentimental": "^1.0.1",
+    "async": "^2.1.4",
     "body-parser": "^1.15.2",
     "ejs": "^2.5.3",
     "express": "^4.14.0",

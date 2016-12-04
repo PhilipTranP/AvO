@@ -1,9 +1,10 @@
-'use strict';
+"use strict";
 
 var express = require('express');
 var path = require('path');
 var twit = require('twit');
 var sentimental = require('Sentimental');
+var async = require('async');
 
 var router = express.Router();
 
@@ -36,76 +37,81 @@ router.post('/search', function(req, res) {
     access_token_secret: 'VjIIOb1IeZQpUJZdoLZBcHh9X8NBD5iMHJk3xWsY23Fwu',
 
   });
-  // set highest score
-  var highestScore = -Infinity;
-  // set highest choice
-  var highestChoice = null;
-  // create new array
-  var array = [];
-  // set score
-  var score = 0;
+
   console.log("----------")
 
-  // iterate through the choices array from the request
-  for(var i = 0; i < choices.length; i++) {
-    (function(i) {
-    // add choice to new array
-    array.push(choices[i])
-    // grad 20 tweets from today
-    twitter.get('search/tweets', {q: '' + choices[i] + ' since:' + today.getFullYear() + '-' +
+   // grade 20 tweets from today with keyword choice and call callback
+  // when done
+  function getAndScoreTweets(choice, callback) {
+    twitter.get('search/tweets', {q: '' + choice + ' since:' + today.getFullYear() + '-' + 
       (today.getMonth() + 1) + '-' + today.getDate(), count:20}, function(err, data) {
-        // perform sentiment analysis
-        score = performAnalysis(data['statuses']);
-        function performAnalysis(tweetSet) {
-		  //set a results variable
-		  var results = 0;
-		  // iterate through the tweets, pulling the text, retweet count, and favorite count
-		  for(var i = 0; i < tweetSet.length; i++) {
-		    var tweet = tweetSet[i]['text'];
-		    var retweets = tweetSet[i]['retweet_count'];
-		    var favorites = tweetSet[i]['favorite_count'];
-		    // remove the hastag from the tweet text
-		    tweet = tweet.replace('#', '');
-		    // perform sentiment on the text
-		    var score = sentimental.analyze(tweet)['score'];
-		    // calculate score
-		    results += score;
-		    if(score > 0){
-		      if(retweets > 0) {
-		        results += (Math.log(retweets)/Math.log(2));
-		      }
-		      if(favorites > 0) {
-		        results += (Math.log(favorites)/Math.log(2));
-		      }
-		    }
-		    else if(score < 0){
-		      if(retweets > 0) {
-		        results -= (Math.log(retweets)/Math.log(2));
-		      }
-		      if(favorites > 0) {
-		        results -= (Math.log(favorites)/Math.log(2));
-		      }
-		    }
-		    else {
-		      results += 0;
-		    }
-		  }
-		  // return score
-		  results = results / tweetSet.length;
-		  return results
-		}
-        console.log("score:", score)
-        console.log("choice:", choices[i])
-        //  determine winner
-        if(score > highestScore) {
-          highestScore = score;
-          highestChoice = choices[i];
-          console.log("winner:",choices[i])
-        }
-        console.log("")
-      });
-    })(i)
+        // perfrom sentiment analysis (see below)
+      if(err) {
+        console.log(err);
+        callback(err.message, undefined);
+        return;
+      }
+      var score = performAnalysis(data['statuses']);
+      console.log("score:", score)
+      console.log("choice:", choice)
+      callback(null, score);
+    });
   }
-  // send response back to the server side; why the need for the timeout?
-  setTimeout(function() { res.end(JSON.stringify({'score': highestScore, 'choice': highestChoice})) }, 5000);
-});
+  //Grade tweets for each choice in parallel and compute winner when
+  //all scores are collected
+  async.map(choices, getAndScoreTweets, function(err, scores) {
+    if(err) {
+      console.log("Unable to score all tweets");
+      res.end(JSON.stringify(err));
+    }
+    var highestChoice = choices[0];
+    var highestScore = scores.reduce(function(prev, cur, index) { 
+      if(prev < cur) {
+        highestChoice = choices[index];
+        return cur;
+      } else {
+        return prev;
+      }
+    });
+    res.end(JSON.stringify({'score': highestScore, 'choice': highestChoice}));
+  });             
+})
+
+function performAnalysis(tweetSet) {
+  //set a results variable
+  var results = 0;
+  // iterate through the tweets, pulling the text, retweet count, and favorite count
+  for(var i = 0; i < tweetSet.length; i++) {
+    var tweet = tweetSet[i]['text'];
+    var retweets = tweetSet[i]['retweet_count'];
+    var favorites = tweetSet[i]['favorite_count'];
+    // remove the hashtag from the tweet text
+    tweet = tweet.replace('#', '');
+    // perfrom sentiment on the text
+    var score = sentimental.analyze(tweet)['score'];
+    // calculate score
+    results += score;
+    if(score > 0){
+      if(retweets > 0) {
+        results += (Math.log(retweets)/Math.log(2));
+      }
+      if(favorites > 0) {
+        results += (Math.log(favorites)/Math.log(2));
+      }
+    }
+    else if(score < 0){
+      if(retweets > 0) {
+        results -= (Math.log(retweets)/Math.log(2));
+      }
+      if(favorites > 0) {
+        results -= (Math.log(favorites)/Math.log(2));
+      }
+    }
+    else {
+      results += 0;
+    }
+  }
+  // return score
+  results = results / tweetSet.length;
+  return results
+}
