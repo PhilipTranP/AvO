@@ -33,7 +33,8 @@ router.post('/search', function(req, res) {
     consumer_key: 'ZeLRdDOKnlfrtAwMyq3TWwhMX',
     consumer_secret: 'uFUj7JVybYTLajzFZ3nyTMNd3mKiWTkfYt49QyZ6N4wkh7JZd0',
     access_token: '2273705648-vYO2MwOtX2583AJUmqjIYELHQWmVwAsBxDqBuJW',
-    access_token_secret: 'VjIIOb1IeZQpUJZdoLZBcHh9X8NBD5iMHJk3xWsY23Fwu'
+    access_token_secret: 'VjIIOb1IeZQpUJZdoLZBcHh9X8NBD5iMHJk3xWsY23Fwu',
+    timeout_ms:           60*1000,
   });
   // set highest score
   var highestScore = -Infinity;
