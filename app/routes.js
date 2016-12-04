@@ -34,7 +34,7 @@ router.post('/search', function(req, res) {
     consumer_secret: 'uFUj7JVybYTLajzFZ3nyTMNd3mKiWTkfYt49QyZ6N4wkh7JZd0',
     access_token: '2273705648-vYO2MwOtX2583AJUmqjIYELHQWmVwAsBxDqBuJW',
     access_token_secret: 'VjIIOb1IeZQpUJZdoLZBcHh9X8NBD5iMHJk3xWsY23Fwu',
-    timeout_ms:           60*1000,
+
   });
   // set highest score
   var highestScore = -Infinity;
@@ -61,9 +61,9 @@ router.post('/search', function(req, res) {
 		  var results = 0;
 		  // iterate through the tweets, pulling the text, retweet count, and favorite count
 		  for(var i = 0; i < tweetSet.length; i++) {
-		    tweet = tweetSet[i]['text'];
-		    retweets = tweetSet[i]['retweet_count'];
-		    favorites = tweetSet[i]['favorite_count'];
+		    var tweet = tweetSet[i]['text'];
+		    var retweets = tweetSet[i]['retweet_count'];
+		    var favorites = tweetSet[i]['favorite_count'];
 		    // remove the hastag from the tweet text
 		    tweet = tweet.replace('#', '');
 		    // perform sentiment on the text
