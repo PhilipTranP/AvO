@@ -22,9 +22,35 @@
 
   <%- contentFor("jumbotron text-center") %>
 
-      <div class="jumbotron text-center">
-        Home Page
-      </div>
+  <div class="jumbotron text-center">
+       
+
+  <div class="choice-container">
+    
+        <h2>Check which one has the winning edge?</h2>
+        <p class="lead">Use Twitter sentiment analysis to find out which product or service is winning.</p><br><br>
+        <div class="form-container">
+          <form action="" method="post">
+            <input id="choice1" type="text" data-choice="1" placeholder="   Your product (i.e., iPhone 8)" name="choice1" class="choice" size="35" style="height:50px;font-size:18pt; padding: 30px;">
+            <input id="choice2" type="text" data-choice="2" placeholder="   Your competitors' (i.e., Pixel)" name="choice2" class="choice" size="35" style="height:50px;font-size:18pt; padding: 30px;">
+            <br><br>
+            <input id="decision" type="submit" value="Check!" class="btn btn-success btn-lg">
+          </form>
+        </div><br><br>
+        <div class="decision-container">
+          <p id="status"></p>
+          <h1 id="decision-text"></h1>
+          <p id="score"></p>
+          <input id="again" value="Again?" class="btn btn-success btn-lg">
+        </div>
+   
+  </div>
+
+    <script src="http://code.jquery.com/jquery-1.11.0.min.js"></script>
+    <script src="http://netdna.bootstrapcdn.com/bootstrap/3.1.1/js/bootstrap.min.js"></script>
+    <script src="../../js/main.js"></script>
+    <script> console.log("hello")</script>
+</div>
 
 
 
