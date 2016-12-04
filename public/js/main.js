@@ -20,7 +20,7 @@ $(function () {
     $("#again").hide();
     // display processing text, update color to black in case of an error
     $("#status").css("color", "black");
-    $("#status").text("Processing ...");
+    $("#status").text("Processing real-time data...");
     // create variable to see if any of the inputs are input
     var anyEmpty = false;
     // array to hold inputs

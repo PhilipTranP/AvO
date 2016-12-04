@@ -1,0 +1,4 @@
+node_module/
+.idea
+sass/
+gulpfile.js
